@@ -17,7 +17,11 @@ class DesignerController extends Controller
      */
     public function index()
     {
-        //
+        $designers = Designer::orderBy('ordering', 'desc')->get();
+        foreach ($designers as $key => $value) {
+            $designers[$key]->status_nice = mapStatus($value->status);
+        }
+        return view('designers::list')->with('items', $designers);
     }
 
     /**
