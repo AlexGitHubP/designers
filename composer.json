@@ -1,0 +1,26 @@
+{
+    "name": "locomotif/designers",
+    "description": "Designers module for Masara",
+    "type": "module",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Popa Alexandru",
+            "email": "p.alexandruadrian@yahoo.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Locomotif\\Designers\\DesignersServiceProvider"
+            ]
+        }
+    },
+    "autoload": {
+       "psr-4": {
+           "Locomotif\\Designers\\": "src/"
+        }
+    }
+}
