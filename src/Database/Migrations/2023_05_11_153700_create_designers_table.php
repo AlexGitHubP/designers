@@ -15,6 +15,7 @@ class CreateDesignersTable extends Migration
     {
         Schema::create('designers', function (Blueprint $table) {
             $table->bigIncrements('id',            )->length(10);
+            $table->unsignedBigInteger('user_id');
             $table->string('name',              255);
             $table->string('surname',           255);
             $table->string('email',             255)->unique();
