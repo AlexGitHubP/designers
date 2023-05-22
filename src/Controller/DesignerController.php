@@ -10,6 +10,10 @@ use Locomotif\Media\Controller\MediaController;
 
 class DesignerController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('authgate');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -31,7 +35,7 @@ class DesignerController extends Controller
      */
     public function create()
     {
-        //
+        return view('designers::create');
     }
 
     /**
@@ -42,7 +46,28 @@ class DesignerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'    => 'required',
+            'surname' => 'required',
+            'email'   => 'required',
+            'status'  =>'required'
+        ]);
+        
+        $designer = new Designer();
+
+        $designer->name         = $request->name;
+        $designer->surname      = $request->surname;
+        $designer->email        = $request->email;
+        $designer->phone        = $request->phone;
+        $designer->url          = $request->url;
+        $designer->description  = $request->description;
+        $designer->ordering     = getOrdering($designer->getTable(), 'ordering');
+        $designer->status       = $request->status;
+        
+        
+        $designer->save();
+
+        return redirect('admin/designers/'.$designer->id.'/edit');
     }
 
     /**
@@ -64,7 +89,8 @@ class DesignerController extends Controller
      */
     public function edit(Designer $designer)
     {
-        //
+        $associatedMedia      = app(MediaController::class)->mediaAssociations($designer->getTable(), $designer->id);
+        return view('designers::edit')->with('item', $designer)->with('associatedMedia', $associatedMedia);
     }
 
     /**
@@ -76,7 +102,24 @@ class DesignerController extends Controller
      */
     public function update(Request $request, Designer $designer)
     {
-        //
+        $request->validate([
+            'name'    => 'required',
+            'surname' => 'required',
+            'email'   => 'required',
+            'status'  =>'required'
+        ]);
+
+        $designer->name         = $request->name;
+        $designer->surname      = $request->surname;
+        $designer->email        = $request->email;
+        $designer->phone        = $request->phone;
+        $designer->url          = $request->url;
+        $designer->description  = $request->description;
+        $designer->status       = $request->status;
+        
+        $designer->save();
+
+        return redirect('admin/designers/'.$designer->id.'/edit');
     }
 
     /**

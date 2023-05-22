@@ -72,11 +72,14 @@
 		<div class='listing-box flex02 alignCenter'>
 			<p>ID</p>
 		</div>
-		<div class='listing-box'>
+		<div class='listing-box flex04'>
 			<p>Nume</p>
 		</div>
 		<div class='listing-box flex03 alignCenter'>
-			<p>Url</p>
+			<p>Email</p>
+		</div>
+		<div class='listing-box flex03 alignCenter'>
+			<p>Telefon</p>
 		</div>
 		<div class='listing-box flex03 alignCenter'>
 			<p>Data</p>
@@ -94,11 +97,14 @@
 				<div class='listing-box flex02 alignCenter'>
 					<p>{{$key+1}}</p>
 				</div>
-				<div class='listing-box'>
-					<p><a href='/admin/designers/{{$item->id}}/edit'>{{ $item->name }}</a></p>
+				<div class='listing-box flex04'>
+					<p><a href='/admin/designers/{{$item->id}}/edit'>{{ $item->name }} {{ $item->surname }}</a></p>
 				</div>
-                <div class='listing-box flex06 alignCenter'>
-					<p>{{ $item->url }}</p>
+                <div class='listing-box flex03 alignCenter'>
+					<p>{{ $item->email }}</p>
+				</div>
+				<div class='listing-box flex03 alignCenter'>
+					<p>{{ $item->phone }}</p>
 				</div>
 				<div class='listing-box flex03 alignCenter'>
 					<p>{{\Carbon\Carbon::parse($item->created_at)->format('Y-d-m')}}</p>
