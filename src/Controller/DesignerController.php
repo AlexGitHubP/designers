@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Locomotif\Designers\Models\Designer;
 use Locomotif\Media\Controller\MediaController;
+use Locomotif\Admin\Models\Users;
 
 class DesignerController extends Controller
 {
@@ -53,9 +54,16 @@ class DesignerController extends Controller
             'status'  =>'required'
         ]);
         
+        //create new user
+        $user = Users::create(['name' => $request->name,'email' => $request->email]);
+        //set the role for the user
+        setUserRole('designer', $user->id);
+
+        //save designer
         $designer = new Designer();
 
         $designer->name         = $request->name;
+        $designer->user_id      = $user->id;
         $designer->surname      = $request->surname;
         $designer->email        = $request->email;
         $designer->phone        = $request->phone;
@@ -64,8 +72,8 @@ class DesignerController extends Controller
         $designer->ordering     = getOrdering($designer->getTable(), 'ordering');
         $designer->status       = $request->status;
         
-        
         $designer->save();
+        
 
         return redirect('admin/designers/'.$designer->id.'/edit');
     }
