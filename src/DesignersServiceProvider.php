@@ -25,6 +25,7 @@ class DesignersServiceProvider extends ServiceProvider
     {
         $this->loadRoutesFrom(__DIR__.'/Routes/routes.php');
         $this->loadViewsFrom(__DIR__.'/views', 'designers');
+        $this->loadViewsFrom(__DIR__.'/views/addresses', 'designerAddresses');
 
         $this->loadMigrationsFrom(__DIR__.'/Database/Migrations');
 
